@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<!--
+<style>
+    th {
+        background-color: lightgray;
+    }
+
+    th, td {
+        padding: 2px 4px;
+        border-style: solid;
+        border-width: 2px 0px;
+    }
+</style>
+    -->
+<style>
+    th.strong {
+        color: darkred;
+        background-color: darkgrey;
+    }
+</style>
+
+<h1>Car List</h1>
+<!-- this is an HTML comment; makes it through to page source -->
+@*this is a Razor comment; stripped out at compile*@
+
+@*go through all cars in the list*@
+<table class="table table-striped">
+    <tr>
+        <th class="strong">Make</th>
+        <th class="strong">Plate(Model)</th>
+        <th class="strong">Year</th>
+    </tr>
+    @foreach (var c in ViewBag.CarList)
+    {
+        <tr>
+            <td>@c.Make</td>
+            <td>@c.Plate</td>
+            <td>@c.Year</td>
+        </tr>
+    }
+</table>

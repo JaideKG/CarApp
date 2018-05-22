@@ -1,0 +1,66 @@
+﻿@model CarApp.Models.Car
+
+@{
+    ViewBag.Title = "CarForm";
+}
+
+<h2>CarForm</h2>
+
+@using (Html.BeginForm("Create", "Home"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Car</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Make, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Make, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Make, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Plate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Plate, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Plate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                <span id="YearWarning"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default"
+                       onclick="return CheckYear()" />
+            </div>
+        </div>
+    </div>
+}
+
+    <script>
+        function CheckYear() {
+            var year = document.getElementById("Year").value;
+            if (year < 1890 || year > 2020) {
+                //alert(year + " is outside the valid range");
+                document.getElementById("YearWarning").innerHTML =
+                    "<b>" + year + " is outside the valid range</b>";
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
